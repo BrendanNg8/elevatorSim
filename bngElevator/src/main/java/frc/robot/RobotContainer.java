@@ -8,10 +8,15 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import yams.mechanisms.positional.Elevator;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import static edu.wpi.first.units.Units.Meters;
+
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 
 
 /**
@@ -25,8 +30,8 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final GenericHID apacController = new GenericHID(1);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -61,6 +66,8 @@ public class RobotContainer {
     m_driverController.x().whileTrue(m_exampleSubsystem.set(0.3));
     m_driverController.y().whileTrue(m_exampleSubsystem
     .set(-0.3));
+    new JoystickButton(apacController, 1).onTrue(m_exampleSubsystem.setHeight(Meters.of(0.8)));
+    new JoystickButton(apacController, 2).onTrue(m_exampleSubsystem.setHeight(Meters.of(1)));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
