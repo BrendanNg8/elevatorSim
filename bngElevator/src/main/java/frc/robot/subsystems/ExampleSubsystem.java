@@ -52,11 +52,11 @@ public class ExampleSubsystem extends SubsystemBase {
   .withControlMode(ControlMode.CLOSED_LOOP)
   .withMechanismCircumference(Meters.of(Millimeters.of(5).in(Meters) * 36)) //Calculating how many times the poly with the track rotates (thing moves elevator)
   //Feedback Constants (PID)
-  .withClosedLoopController(1.5, 0, 0, MetersPerSecond.of(2), MetersPerSecondPerSecond.of(3))
-  .withSimClosedLoopController(3.25, 0, 0, MetersPerSecond.of(3), MetersPerSecondPerSecond.of(3.5))
+  .withClosedLoopController(3.5, 0, 0, MetersPerSecond.of(3), MetersPerSecondPerSecond.of(3))
+  .withSimClosedLoopController(3, 0, 0, MetersPerSecond.of(3), MetersPerSecondPerSecond.of(3)) //3.25 (kP)
   //Feedforward Constants
-  .withFeedforward(new ElevatorFeedforward(0.2, 0.3, 0.78, 0.001))
-  .withSimFeedforward(new ElevatorFeedforward(0, 0.198, 0.89, 0.0065))
+  .withFeedforward(new ElevatorFeedforward(0, 0.3, 0.85, 0.002)) 
+  .withSimFeedforward(new ElevatorFeedforward(0, 0.199, 0.9787, 0.0031)) 
   .withTelemetry("ElevatorMotor", TelemetryVerbosity.HIGH)
   .withGearing(SmartMechanism.gearing(SmartMechanism.gearbox(6.8444))) 
   // Motor properties to prevent over currenting; i.e. prevents motor from using too much power in a sense
@@ -77,8 +77,8 @@ public class ExampleSubsystem extends SubsystemBase {
   .withRelativePosition(new Translation3d(Meters.of(-0.25), Meters.of(0), Meters.of(0.25)));
 
   private ElevatorConfig elevconfig = new ElevatorConfig(SmartMotorController)
-  .withStartingHeight(Meters.of(0.5))
-  .withHardLimits(Meters.of(0), Meters.of(3))
+  .withStartingHeight(Meters.of(0)) //set to 0 while tesitng
+  .withHardLimits(Meters.of(0), Meters.of(1.5)) //height limit
   .withTelemetry("Elevator", TelemetryVerbosity.HIGH)
   .withMass(Pounds.of(16))
   .withMechanismPositionConfig(m_robotToMechanism);

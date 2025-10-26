@@ -66,8 +66,8 @@ public class RobotContainer {
     m_driverController.x().whileTrue(m_exampleSubsystem.set(0.3));
     m_driverController.y().whileTrue(m_exampleSubsystem
     .set(-0.3));
-    new JoystickButton(apacController, 1).onTrue(m_exampleSubsystem.setHeight(Meters.of(0.8)));
-    new JoystickButton(apacController, 2).onTrue(m_exampleSubsystem.setHeight(Meters.of(1)));
+    new JoystickButton(apacController, 2).onTrue(m_exampleSubsystem.setHeight(Meters.of(0.8)));
+    new JoystickButton(apacController, 1).onTrue(m_exampleSubsystem.setHeight(Meters.of(0.1)));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
