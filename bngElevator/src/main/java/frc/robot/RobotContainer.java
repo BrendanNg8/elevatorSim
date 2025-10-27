@@ -8,6 +8,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.WristSubsystem;
 import yams.mechanisms.positional.Elevator;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -17,6 +18,8 @@ import static edu.wpi.first.units.Units.Meters;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+
+import static edu.wpi.first.units.Units.Degrees;
 
 
 /**
@@ -28,6 +31,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final WristSubsystem m_WristSubsystem = new WristSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
@@ -39,6 +43,11 @@ public class RobotContainer {
     configureBindings();
 
     m_exampleSubsystem.setDefaultCommand(m_exampleSubsystem.setHeight(Meters.of(0)));
+    //Set defaykt cinnabd to force the arm to go to 0
+    m_WristSubsystem.setDefaultCommand(m_WristSubsystem.setAngle(Degrees.of(0)));
+
+
+
   }
 
   
@@ -68,6 +77,12 @@ public class RobotContainer {
     .set(-0.3));
     new JoystickButton(apacController, 2).onTrue(m_exampleSubsystem.setHeight(Meters.of(0.8)));
     new JoystickButton(apacController, 1).onTrue(m_exampleSubsystem.setHeight(Meters.of(0.1)));
+
+    new JoystickButton(apacController, 4).onTrue(m_WristSubsystem.setAngle(Degrees.of(-5)));
+    new JoystickButton(apacController, 3).onTrue(m_WristSubsystem.setAngle(Degrees.of(15)));
+    new JoystickButton(apacController, 6).onTrue(m_WristSubsystem.set(0.3));
+    new JoystickButton(apacController, 5).onTrue(m_WristSubsystem.set(-0.3));
+
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
