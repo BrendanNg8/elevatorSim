@@ -42,9 +42,9 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
-    m_exampleSubsystem.setDefaultCommand(m_exampleSubsystem.setHeight(Meters.of(0)));
-    //Set defaykt cinnabd to force the arm to go to 0
-    m_WristSubsystem.setDefaultCommand(m_WristSubsystem.setAngle(Degrees.of(0)));
+
+    // m_exampleSubsystem.setDefaultCommand(m_exampleSubsystem.setHeight(Meters.of(0)));
+    // //Set defaykt cinnabd to force the arm to go to 0
 
 
 
@@ -63,30 +63,30 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    // new Trigger(m_exampleSubsystem::exampleCondition)
+    //     .onTrue(new ExampleCommand(m_exampleSubsystem));
     
-    //Scheduling 'setHeight' when controlling A button is pressed -> Take method exampleSub that we made
-    //Canceling on release
-    m_driverController.a().whileTrue(m_exampleSubsystem.setHeight(Meters.of(0.5)));
-    m_driverController.b().whileTrue(m_exampleSubsystem.setHeight(Meters.of(1)));
-    //Scheduling 'set' when the Xbox controller's X button is pressed
-    //Cancels on release
-    m_driverController.x().whileTrue(m_exampleSubsystem.set(0.3));
-    m_driverController.y().whileTrue(m_exampleSubsystem
-    .set(-0.3));
-    new JoystickButton(apacController, 2).onTrue(m_exampleSubsystem.setHeight(Meters.of(0.8)));
-    new JoystickButton(apacController, 1).onTrue(m_exampleSubsystem.setHeight(Meters.of(0.1)));
+    // //Scheduling 'setHeight' when controlling A button is pressed -> Take method exampleSub that we made
+    // //Canceling on release
+    // m_driverController.a().whileTrue(m_exampleSubsystem.setHeight(Meters.of(0.5)));
+    // m_driverController.b().whileTrue(m_exampleSubsystem.setHeight(Meters.of(1)));
+    // //Scheduling 'set' when the Xbox controller's X button is pressed
+    // //Cancels on release
+    // m_driverController.x().whileTrue(m_exampleSubsystem.set(0.3));
+    // m_driverController.y().whileTrue(m_exampleSubsystem
+    // .set(-0.3));
+    // new JoystickButton(apacController, 2).onTrue(m_exampleSubsystem.setHeight(Meters.of(0.8)));
+    // new JoystickButton(apacController, 1).onTrue(m_exampleSubsystem.setHeight(Meters.of(0.1)));
 
-    new JoystickButton(apacController, 4).onTrue(m_WristSubsystem.setAngle(Degrees.of(-5)));
-    new JoystickButton(apacController, 3).onTrue(m_WristSubsystem.setAngle(Degrees.of(15)));
-    new JoystickButton(apacController, 6).onTrue(m_WristSubsystem.set(0.3));
-    new JoystickButton(apacController, 5).onTrue(m_WristSubsystem.set(-0.3));
+    // new JoystickButton(apacController, 4).onTrue(m_WristSubsystem.setAngle(Degrees.of(-5)));
+    // new JoystickButton(apacController, 3).onTrue(m_WristSubsystem.setAngle(Degrees.of(15)));
+    // new JoystickButton(apacController, 6).onTrue(m_WristSubsystem.set(0.3));
+    // new JoystickButton(apacController, 5).onTrue(m_WristSubsystem.set(-0.3));
 
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    // // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
+    // // cancelling on release.
+    // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
   }
 
   /**
