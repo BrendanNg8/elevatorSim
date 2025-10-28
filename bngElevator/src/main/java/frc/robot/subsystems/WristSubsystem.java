@@ -34,25 +34,27 @@ import static edu.wpi.first.units.Units.Seconds;
 import static edu.wpi.first.units.Units.Volts;
 import edu.wpi.first.units.measure.Angle;
 import static edu.wpi.first.units.Units.Feet;
+import static edu.wpi.first.units.Units.Meters;
 import static edu.wpi.first.units.Units.Pounds;
 
 public class WristSubsystem extends SubsystemBase {
   private SmartMotorControllerConfig smcConfig = new SmartMotorControllerConfig(this)
   .withControlMode(ControlMode.CLOSED_LOOP)
   //Feedback Constants (PID)
-  .withClosedLoopController(50, 0, 0, DegreesPerSecond.of(90), DegreesPerSecondPerSecond.of(45)) //! robot value
-  .withSimClosedLoopController(50, 0, 0, DegreesPerSecond.of(90), DegreesPerSecondPerSecond.of(45)) //! sim value
+  .withClosedLoopController(0, 0, 0, DegreesPerSecond.of(360), DegreesPerSecondPerSecond.of(1440)) //? robot value _=> change to 0?
+  .withSimClosedLoopController(0, 0, 0, DegreesPerSecond.of(450), DegreesPerSecondPerSecond.of(720)) //? sim value_=> change to 0?
   //Feedforward Constants 
   .withFeedforward(new ArmFeedforward(0, 0, 0)) //! robot value
   .withSimFeedforward(new ArmFeedforward(0, 0, 0)) //! sim value
 
   .withTelemetry("ArmMotor", TelemetryVerbosity.HIGH)
-  .withGearing(SmartMechanism.gearing(SmartMechanism.gearbox(3,4)))
+  .withGearing(SmartMechanism.gearing(SmartMechanism.gearbox(67.407)))
   .withMotorInverted(false)
   .withIdleMode(MotorMode.COAST) //! Should technically be break but
   .withStatorCurrentLimit(Amps.of(40))
-  .withClosedLoopRampRate(Seconds.of(0.25))
-  .withOpenLoopRampRate(Seconds.of(0.25));
+  .withSupplyCurrentLimit(Amps.of(40));
+  //.withClosedLoopRampRate(Seconds.of(0.25))
+  //.withOpenLoopRampRate(Seconds.of(0.25));
 
   //Motor controller object
   private final TalonFX talon = new TalonFX(subsystemConstants.Wrist_ID, subsystemConstants.CANBUS); 
@@ -64,11 +66,11 @@ public class WristSubsystem extends SubsystemBase {
   //! Soft is applied to the smc PID (SmartMotorController)
   .withSoftLimits(Degrees.of(-20), Degrees.of(10))
   //! Hard is applied to the simulation
-  .withHardLimit(Degrees.of(-30), Degrees.of(40))
+  .withHardLimit(Degrees.of(-360), Degrees.of(360))
   //! Where the arm stops
   .withStartingPosition(Degrees.of(-5))
   //! Length and mass of your arm for sim
-  .withLength(Feet.of(3))
+  .withLength(Meters.of(0.25))
   .withMass(Pounds.of(1))
 
   .withTelemetry("Arm", TelemetryVerbosity.HIGH);
