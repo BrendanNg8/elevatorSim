@@ -48,7 +48,7 @@ public class WristSubsystem extends SubsystemBase {
           .withClosedLoopController(
               0, 0, 0, DegreesPerSecond.of(360), DegreesPerSecondPerSecond.of(1440))
           .withSimClosedLoopController(
-              0, 0, 0, DegreesPerSecond.of(60), DegreesPerSecondPerSecond.of(60))
+              3.772, 0, 0, DegreesPerSecond.of(60), DegreesPerSecondPerSecond.of(60))
           //      .withSoftLimit(Degrees.of(-360), Degrees.of(360))
           .withGearing(gearing(gearbox(67.407)))
           //      .withExternalEncoder(armMotor.getAbsoluteEncoder())
@@ -59,7 +59,7 @@ public class WristSubsystem extends SubsystemBase {
           .withSupplyCurrentLimit(Amps.of(40))
           .withMotorInverted(false)
           .withFeedforward(new ArmFeedforward(0, 0, 0, 0))
-          .withSimFeedforward(new ArmFeedforward(0, 0, 0, 0))
+          .withSimFeedforward(new ArmFeedforward(0, 0.101, 9.34, 0.16))
           .withControlMode(ControlMode.CLOSED_LOOP)
           .withStartingPosition(Degrees.of(0));
   private final SmartMotorController motor =
