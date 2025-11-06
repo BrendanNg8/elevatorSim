@@ -41,8 +41,32 @@ public static enum ElevatorPosition {
         return distance;
     }
 
+}  
+public static enum WristPosition {
+    Stowed(Degrees.of(0)),
+    AlgaeGroundIntake(Degrees.of(-150)),
+    L1Score(Degrees.of(-120)),
+    L2Score(Degrees.of(-140)),
+    L3Score(Degrees.of(-140)),
+    L4Score(Degrees.of(-130)),
+    ReefGrabAlgae(Degrees.of(135)),
+    ReefSCAlgae(Degrees.of(-130)),
+    GrabAlgaeIntermediate(Degrees.of(90)),
+    AlgaeProcessor(Degrees.of(-175)),
+    AlgaeTransit(Degrees.of(-270)),
+    AlgaeNet(Degrees.of(-220)),
+    Test(Degrees.of(-180));
 
-}
+    private final Angle angle;
+
+    WristPosition(Angle angle) {
+      this.angle = angle;
+    }
+
+    public Angle angle() {
+      return angle;
+    }
+  } 
 }
 
 

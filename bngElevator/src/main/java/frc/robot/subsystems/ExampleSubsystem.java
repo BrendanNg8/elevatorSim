@@ -17,6 +17,7 @@ import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import yams.mechanisms.SmartMechanism;
 import yams.motorcontrollers.SmartMotorController;
@@ -85,13 +86,14 @@ public class ExampleSubsystem extends SubsystemBase {
 
   private Elevator elevator = new Elevator(elevconfig);
   //Method returning height--similar to setting speed on a motor
-  public Command setHeight(Distance height) {return elevator.setHeight(height);}
-  //public boolean atHeight(Distance target) {return Math.abs(getHeight().in(Meters) - target.in(Meters)) <= subsystemConstants.ELEVATOR_TOLERANCE.in(Meters);}
-  //public Command waitUntilAtHeight(Distance target) {return edu.wpi.first.wpilibj2.command.Commands.waitUntil(() -> atHeight(target));}
-
+ 
+  
   //Move the elevator up and down
   public Command set(double DutyCycle) {return elevator.set(DutyCycle);}
   public Command sysId() {return elevator.sysId(Volts.of(7), Volts.of(2).per(Second), Seconds.of(4));}
+
+  public Command setHeight(Distance height) {return elevator.setHeight(height);}
+  
   
   /** Creates a new ExampleSubsystem. 
    * @return */
@@ -131,5 +133,9 @@ public class ExampleSubsystem extends SubsystemBase {
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
     elevator.simIterate();
+  }
+  public Command waitUntilAtHeight(Distance distance) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'waitUntilAtHeight'");
   }
 }
