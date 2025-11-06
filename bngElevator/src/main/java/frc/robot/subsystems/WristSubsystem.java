@@ -82,6 +82,7 @@ public class WristSubsystem extends SubsystemBase {
           .withMechanismPositionConfig(robotToMechanism);
   private final Arm wrist = new Arm(m_config);
 
+
   public WristSubsystem() {}
 
   public void periodic() {
@@ -111,4 +112,6 @@ public class WristSubsystem extends SubsystemBase {
   public Command setAngle(Angle angle) {
     return wrist.setAngle(angle);
   }
+  public boolean atAngle(Angle target) {return ((Math.abs(getAngle().abs(Degrees) - target.abs(Degrees)))<= (subsystemConstants.WRIST_TOLERANCE));}
+  public Command WaitUntilAtAngle(Angle target) {return edu.wpi.first.wpilibj2.command.Commands.waitUntil(() -> atAngle(target))}
 }
