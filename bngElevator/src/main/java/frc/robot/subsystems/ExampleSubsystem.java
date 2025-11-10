@@ -34,6 +34,7 @@ import static edu.wpi.first.units.Units.Inch;
 import static edu.wpi.first.units.Units.Pounds;
 
 import edu.wpi.first.units.measure.Distance;
+import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.DutyCycle;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
 
@@ -91,8 +92,11 @@ public class ExampleSubsystem extends SubsystemBase {
   //Move the elevator up and down
   public Command set(double DutyCycle) {return elevator.set(DutyCycle);}
   public Command sysId() {return elevator.sysId(Volts.of(7), Volts.of(2).per(Second), Seconds.of(4));}
-
+  public Distance getHeight() {return elevator.getHeight();}
   public Command setHeight(Distance height) {return elevator.setHeight(height);}
+  public Command WaitHeight(Distance target) {return edu.wpi.first.wpilibj2.command.Commands.waitUntil(() -> atHeight(target));}
+  public boolean atHeight(Distance target) {return Math.abs(getHeight().in(Meters) - target.in(Meters)) <= subsystemConstants.ELEVATOR_TOLERANCE.in(Meters);}
+
   
   
   /** Creates a new ExampleSubsystem. 
