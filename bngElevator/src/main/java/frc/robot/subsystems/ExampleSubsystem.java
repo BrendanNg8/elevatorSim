@@ -42,6 +42,7 @@ import static edu.wpi.first.units.Units.Second;
 import static edu.wpi.first.units.Units.Seconds;
 import static edu.wpi.first.units.Units.Volts;
 import frc.robot.subsystems.subsystemConstants;
+import frc.robot.subsystems.subsystemConstants.ElevatorPosition;
 import yams.motorcontrollers.remote.TalonFXWrapper;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -93,7 +94,7 @@ public class ExampleSubsystem extends SubsystemBase {
   public Command set(double DutyCycle) {return elevator.set(DutyCycle);}
   public Command sysId() {return elevator.sysId(Volts.of(7), Volts.of(2).per(Second), Seconds.of(4));}
   public Distance getHeight() {return elevator.getHeight();}
-  public Command setHeight(Distance height) {return elevator.setHeight(height);}
+  public Command setHeight(Distance l4) {return elevator.setHeight(l4);}
   public Command WaitHeight(Distance target) {return edu.wpi.first.wpilibj2.command.Commands.waitUntil(() -> atHeight(target));}
   public boolean atHeight(Distance target) {return Math.abs(getHeight().in(Meters) - target.in(Meters)) <= subsystemConstants.ELEVATOR_TOLERANCE.in(Meters);}
 

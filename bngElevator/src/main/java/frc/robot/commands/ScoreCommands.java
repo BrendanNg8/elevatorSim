@@ -28,10 +28,10 @@ public class ScoreCommands {
 
                 Command reachTargets = 
                     Commands.parallel(
-                        elevator.setHeight(elevatorTarget),
-                        wrist.setAngle(wristTarget)
-
+                        Commands.deadline(elevator.WaitHeight(elevatorTarget), elevator.setHeight(elevatorTarget)), //Go to the level height
+                        Commands.deadline(wrist.WaitUntilAtAngle(wristTarget), wrist.setAngle(wristTarget)) //Set the level angle
                     );
+                    
 
                 Command postScore = 
                     Commands.sequence(

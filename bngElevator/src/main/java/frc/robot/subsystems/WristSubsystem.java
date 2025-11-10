@@ -20,6 +20,7 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.units.Units;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.subsystemConstants;
 import org.littletonrobotics.junction.Logger;
@@ -112,6 +113,8 @@ public class WristSubsystem extends SubsystemBase {
   public Command setAngle(Angle angle) {
     return wrist.setAngle(angle);
   }
-  public boolean atAngle(Angle target) {return ((Math.abs(getAngle().abs(Degrees) - target.abs(Degrees)))<= (subsystemConstants.WRIST_TOLERANCE));}
-  public Command WaitUntilAtAngle(Angle target) {return edu.wpi.first.wpilibj2.command.Commands.waitUntil(() -> atAngle(target))}
+  public boolean atAngle(Angle target) { return Math.abs(getAngle().in(Degrees) - target.in(Degrees)) 
+  <= subsystemConstants.WRIST_TOLERANCE.in(Degrees);}
+
+  public Command WaitUntilAtAngle(Angle target) {return Commands.waitUntil(() -> atAngle(target));}
 }

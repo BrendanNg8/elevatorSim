@@ -7,6 +7,8 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.ScoreCommands;
+import frc.robot.commands.elevatorCommands;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.WristSubsystem;
 import yams.mechanisms.positional.Elevator;
@@ -35,6 +37,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final WristSubsystem m_WristSubsystem = new WristSubsystem();
+  private final ScoreCommands m_ScoreCommands = new ScoreCommands();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
@@ -87,12 +90,15 @@ public class RobotContainer {
     // new JoystickButton(apacController, 3).onTrue(m_WristSubsystem.setAngle(Degrees.of(15)));
     // new JoystickButton(apacController, 6).onTrue(m_WristSubsystem.set(0.3));
     // new JoystickButton(apacController, 5).onTrue(m_WristSubsystem.set(-0.3));
-
+    JoystickButton reachTargetsButton = new JoystickButton(apacController, 1);
+    reachTargetsButton.onTrue(ScoreCommands.scoreReefLevel(m_exampleSubsystem, m_WristSubsystem, 2));
+    }
 
     // // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // // cancelling on release.
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
+    /* 
     new JoystickButton(apacController, 8)
     .onTrue(
       Commands.runOnce(
@@ -104,6 +110,7 @@ public class RobotContainer {
     );
   }
 
+    */
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

@@ -62,13 +62,30 @@ public class elevatorCommands {
             var stowElevator = subsystemConstants.ElevatorPosition.Down.distance();
             var stowWrist = subsystemConstants.WristPosition.Stowed.angle();
             
-            Commands.sequence(Commands.deadline(elevator.waitUntilAtHeight(subsystemConstants.ElevatorPosition.L4.distance()), 
-            elevator.setHeight(subsystemConstants.ElevatorPosition.L4.distance()),Commands.deadline(null, null)) //finish
-            );
+            //L4 sequence -> Move elevator till within tolerance then set the angle until it's within tolerance
+            Commands.sequence(
+            Commands.deadline(elevator.waitUntilAtHeight(subsystemConstants.ElevatorPosition.L4.distance()),
+            elevator.setHeight(subsystemConstants.ElevatorPosition.L4.distance())), 
+            Commands.deadline(wrist.WaitUntilAtAngle(subsystemConstants.WristPosition.L4Score.angle()),
+            wrist.setAngle(subsystemConstants.WristPosition.L4Score.angle())));
 
-            
+            Commands.sequence(
+            Commands.deadline(elevator.waitUntilAtHeight(subsystemConstants.ElevatorPosition.L3.distance()),
+            elevator.setHeight(subsystemConstants.ElevatorPosition.L3.distance())), 
+            Commands.deadline(wrist.WaitUntilAtAngle(subsystemConstants.WristPosition.L3Score.angle()),
+            wrist.setAngle(subsystemConstants.WristPosition.L3Score.angle())));
+
+            Commands.sequence(
+            Commands.deadline(elevator.waitUntilAtHeight(subsystemConstants.ElevatorPosition.L2.distance()),
+            elevator.setHeight(subsystemConstants.ElevatorPosition.L2.distance())), 
+            Commands.deadline(wrist.WaitUntilAtAngle(subsystemConstants.WristPosition.L2Score.angle()),
+            wrist.setAngle(subsystemConstants.WristPosition.L2Score.angle())));
+
+            return Commands.sequence(
+            Commands.deadline(elevator.waitUntilAtHeight(subsystemConstants.ElevatorPosition.L1.distance()),
+            elevator.setHeight(subsystemConstants.ElevatorPosition.L1.distance())), 
+            Commands.deadline(wrist.WaitUntilAtAngle(subsystemConstants.WristPosition.L1Score.angle()),
+            wrist.setAngle(subsystemConstants.WristPosition.L1Score.angle())));
         } 
 
-    
-    
 }
